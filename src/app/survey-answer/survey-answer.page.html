@@ -1,0 +1,67 @@
+<ion-content>
+  <div class="top_ans">
+    <ion-button fill="clear" color="danger" (click)="closeModal()">
+      {{"CLOSE" | translate }}
+    </ion-button>
+  </div>
+
+
+  <ion-list-header color="danger" class="ion-text-wrap">
+    <p><strong>Question :</strong> <br /> {{ question }}</p>
+  </ion-list-header>
+
+  <ion-radio-group [(ngModel)]="selectedAnswer" *ngIf="survQ_grade">
+    <ion-item *ngFor="let item of answerList" (ionFocus)="radioFocus()" (click)="radioSelect(item.sv_answers_def_id)"
+      (ionBlur)="radioBlur()">
+      <ion-label class="ion-text-wrap">{{item.answer}} </ion-label>
+      <ion-radio slot="start" name="selectedAnswer" value="{{item.sv_answers_def_id}}"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+  <ion-item *ngIf="survQ_date">
+    <ion-label position="stacked">{{"DATE" | translate }} <b color="danger">*</b></ion-label>
+    <ion-datetime displayFormat="MMMM YYYY" [(ngModel)]="date_answer" name="date_answer" min="1950-01" max="2022-12"
+      pickerFormat="MMMM YYYY"></ion-datetime>
+  </ion-item>
+
+  <ion-item *ngIf="survQ_text">
+    <ion-label position="stacked">{{"TEXT" | translate }} <b color="danger">*</b></ion-label>
+    <ion-textarea elastic rows="5" [(ngModel)]="text_answer" name="text_answer"></ion-textarea>
+  </ion-item>
+
+  <ion-item *ngIf="survQ_number">
+    <ion-label position="stacked">{{"NUMBER" | translate }} <b color="danger">*</b></ion-label>
+    <ion-input type="number" [(ngModel)]="number_answer" name="number_answer"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="survQ_multiple">
+    <ion-label position="stacked">{{"MULTIPLE_CHOICE" | translate }} </ion-label>
+    <ion-select multiple="true" interface="action-sheet" [(ngModel)]="multiple_answer" name="multiple_answer">
+      <ion-select-option *ngFor="let item of answerList" value="{{item.sv_answers_def_id}}">{{item.answer}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">{{"COMMENT" | translate }}</ion-label>
+    <ion-textarea elastic rows="5" [(ngModel)]="sv_comment" name="sv_comment"></ion-textarea>
+  </ion-item>
+
+  <div *ngIf="media_yn" style="margin:0.6em 10px; text-align: center;">
+    <ion-row>
+      <ion-col size="3" *ngFor="let item of mediaPictureList">
+        <img src="{{ item.photo }}" style="width:100%" (click)="showMedia(item.filename)">
+        <p><small>{{ item.description }} </small></p>
+      </ion-col>
+    </ion-row>
+
+    <p>{{ tt_saved_media }} {{"SAVED_MEDIA" | translate }}</p>
+    <ion-icon name="camera-outline" (click)="newMedia();" style="color:grey; font-size: 9em;"></ion-icon>
+  </div>
+
+  <div style="margin:0.6em 10px;">
+    <ion-button color="danger" expand="block" (click)="next();" disabled="{{ disabled_btn }}">{{"NEXT_QUESTION" |
+      translate }}
+    </ion-button>
+  </div>
+</ion-content>

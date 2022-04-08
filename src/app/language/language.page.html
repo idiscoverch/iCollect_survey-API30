@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"LANG_SELECT" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div>
+  <!--<img src="../../assets/mdlz-logo.png" style="margin-top: 60px; margin-left: 18%;">-->
+  <h3>@iCollect.survey</h3>
+  
+  <ion-list class="langSel">
+    <ion-radio-group (ionChange)="changeLanguage($event)">
+      <ion-item>
+        <ion-label><img src="../../assets/en.jpg"> English</ion-label>
+        <ion-radio color="danger" name="language" value="en"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><img src="../../assets/fr.jpg"> Français</ion-label>
+        <ion-radio color="danger" name="language" value="fr"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><img src="../../assets/id.jpg"> Bahasa</ion-label>
+        <ion-radio color="danger" name="language" value="id"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</div>
+
+  <div class="footer">
+    <ion-note>
+      <p>Developed by RothDevCon </p>
+      <p> @2016-2021</p>
+    </ion-note>
+  </div>
+</ion-content>

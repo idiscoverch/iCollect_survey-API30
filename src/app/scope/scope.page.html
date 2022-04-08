@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="backToDetails()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{"CHOOSE_SURVEY_ISSUE" | translate }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img src="assets/image/survey.png">
+
+  <div style="margin-top: 40px; margin-top: 40px; text-align: center;">{{"CHOOSE_SURVEY_ISSUE_TXT" | translate }} </div>
+
+  <div style="margin:0.6em 10px;">
+    <ion-button color="danger" expand="block" (click)="newSurvey();"> {{"CREATE_SURVEY" | translate }} </ion-button>
+  </div>
+  
+  <div style="margin:0.6em 10px;">
+    <ion-button color="danger" expand="block" (click)="newIssue();">{{"CREATE_ISSUE" | translate }} </ion-button>
+  </div>
+
+  <div style="width: 124px; margin:40px auto;">
+    <img src="assets/image/choice.png" style="width: 124px; height: auto;">
+  </div>
+</ion-content>

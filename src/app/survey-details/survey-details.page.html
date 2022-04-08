@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="backToDB()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{"SURVEY_DETAILS" | translate }}</ion-title>  
+    <ion-buttons slot="end">
+      <ion-button (click)="surveyMedia()">
+        <ion-icon name="images-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of results">
+      <ion-label>
+        <h2>{{ item.cvalue }}</h2>
+        <p><ion-icon name="caret-forward-outline"></ion-icon> {{ item.text_answer }}</p>
+        <small style="color:red;"><ion-icon name="calendar-outline"></ion-icon> {{ item.created_date }}</small>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer *ngIf="!continue_btn">
+  <ion-button color="danger" expand="block" (click)="finishSurvey();">{{"FINISH_SURVEY" | translate }} </ion-button>
+</ion-footer>

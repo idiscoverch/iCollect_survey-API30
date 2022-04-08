@@ -1,0 +1,43 @@
+ion-content.background {
+    --background: url('/assets/login.jpg') no-repeat 10% center/cover;
+    --background-size: cover;
+}
+
+ion-list.langSel {
+  position: absolute;
+  width:85%;
+  left:15%;
+  top:40%;
+  color: #000;
+  background:none;
+}
+
+ion-item {
+    color: #000; 
+    --background:none;
+    border-bottom: 3px solid rgb(77, 12, 107);;
+    margin-bottom: 20px; 
+}
+
+ion-label img {
+    width: 25px;
+}
+
+h3 {
+    text-align: center;
+}
+
+.footer {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+}
+
+ion-note {
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+ion-toolbar {
+    display: none;
+}

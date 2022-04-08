@@ -1,0 +1,7 @@
+{
+  "name": "icollect_survey",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

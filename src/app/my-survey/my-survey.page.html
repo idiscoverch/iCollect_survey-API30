@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="backToDB()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{"MY_SURVEY" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="filter_box">
+    <ion-row>
+      <ion-col size="2" no-padding style="font-size:x-large; text-align: center; padding-top: 20px;">
+        <ion-icon name="filter-outline"></ion-icon>
+      </ion-col>
+  
+      <ion-col size="10" no-padding>
+        <ion-list>
+          <ion-item>
+            <ion-label position="stacked">{{"FILTER_TYPE" | translate }} </ion-label>
+            <ion-select interface="action-sheet" [(ngModel)]="type_filter" (ionChange)="filterSurvey()" name="type_filter">
+              <ion-select-option value="scopes">{{"SCOPES" | translate }}</ion-select-option>
+              <ion-select-option value="partners">{{"PARTNERS" | translate }}</ion-select-option>
+              <ion-select-option selected value="complete">{{"COMPLETE_LIST" | translate }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+  
+          <ion-item *ngIf="surv_partners">
+            <ion-label position="stacked">{{"LIST_PARTNERS" | translate }} </ion-label>
+            <ion-select interface="action-sheet" [(ngModel)]="sel_partner" (ionChange)="filterSurveyResults('partners')" name="sel_partner">
+              <ion-select-option *ngFor="let item of partnersList" [value]="item.id_contact">{{item.contact_name}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+  
+          <ion-item *ngIf="surv_scopes">
+            <ion-label position="stacked">{{"LIST_SCOPE" | translate }} </ion-label>
+            <ion-select interface="action-sheet" [(ngModel)]="sel_scope" (ionChange)="filterSurveyResults('scopes')" name="sel_scope">
+              <ion-select-option *ngFor="let item of scopesList" [value]="item.id_regvalue">{{item.cvalue}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+  
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let item of results">
+      <ion-label (click)="surveyDetails(item.survey_unique_id)">
+        <h2>{{ item.cvalue }} - {{ item.contact_code }} ({{ item.total }})</h2>
+        <p>{{ item.code_town }} - {{ item.created_date }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

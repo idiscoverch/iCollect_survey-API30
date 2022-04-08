@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"PROJECT_LIST" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="ionRefresh($event)" (ionPull)="ionPull($event)"
+    (ionStart)="ionStart($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <h3 *ngIf="projectList.length == 0" style="text-align: center;">{{"NO_PROJECT" | translate }}</h3>
+
+  <ion-list>
+    <ion-item *ngFor="let item of projectList" (click)="townSelection(item.id_project)">
+      <ion-label>
+        <h3>{{item.project_name}}</h3>
+        <small><ion-icon color="danger" name="calendar-outline"></ion-icon> {{item.start_date}} </small>
+      </ion-label>
+      <ion-button slot="end" fill="clear">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

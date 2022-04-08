@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="backToDB()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{"MY_ISSUE" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of results">
+      <ion-label>
+        <h2>{{ item.cvalue }} - {{ item.contact_code }} ({{ item.total }})</h2>
+        <p>{{ item.code_town }} - {{ item.created_date }}</p>
+      </ion-label>
+      <ion-button (click)="surveyMedia(item.survey_unique_id)" slot="end">
+        <ion-icon name="images-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

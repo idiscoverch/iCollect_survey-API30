@@ -1,0 +1,32 @@
+.db_boxes {
+    border-radius: 10px;
+    width:90%;
+    margin: 40px auto;
+    box-shadow: 2px 5px 5px rgb(107, 107, 107);
+    height: 70px;
+    background-color: indianred;
+    color: #fff;
+}
+
+.db_boxes_user {
+    border-radius: 10px;
+    width:90%;
+    margin: 40px auto;
+    box-shadow: 2px 5px 5px rgb(107, 107, 107);
+    height: 70px;
+}
+
+ion-title {
+    text-align: center;
+}
+
+ion-header {
+    display: none;
+}
+
+.logout {
+    width:100%;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 40px;
+}

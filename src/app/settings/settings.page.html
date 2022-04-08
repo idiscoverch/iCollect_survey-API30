@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"SETTINGS" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="width: 125px; margin:0 auto;">
+    <img src="assets/image/settings.png" style="width: 125px; height: 125px;">
+  </div>
+
+  <div style="margin:0.6em 10px;">
+    <ion-button expand="block" color="danger" (click)="localUpdate()">
+      <ion-icon name="cloud-download" style="margin-right:7px;"></ion-icon>
+      {{"UPDATE_LOCAL_DB" | translate }}
+    </ion-button>
+  </div>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>{{"VARIABLE" | translate }}</ion-label>
+      <ion-icon name="cloud-download-outline" (click)="download('variables')" slot="end"></ion-icon>
+    </ion-item>
+
+    <!--
+    <ion-item>
+      <ion-label>{{"AGT_DEPLOYMENT" | translate }}</ion-label>
+      <ion-icon name="cloud-download-outline" (click)="download('agent_deployment')" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{"QUESTIONS" | translate }}</ion-label>
+      <ion-icon name="cloud-download-outline" (click)="download('project_tasks')" slot="end"></ion-icon>
+    </ion-item>
+  -->
+
+    <ion-item>
+      <ion-label>{{"ANSWER" | translate }}</ion-label>
+      <ion-icon name="cloud-download-outline" (click)="download('answers')" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-label> {{"ISSUE_ITEMS" | translate }}</ion-label>
+      <ion-icon name="cloud-download-outline" (click)="download('issue_items')" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-list-header>
+      {{"DATA_UPLOAD" | translate }}
+    </ion-list-header>
+  </ion-list>
+
+  <div style="margin:0.6em 10px;">
+    <ion-button expand="block" color="danger" (click)="backup()">
+      <ion-icon name="cloud-upload" style="margin-right:7px;"></ion-icon>
+      {{"DB_BACKUP" | translate }}
+    </ion-button>
+    <small *ngIf="backup_data" style="color: #676a6c;">
+      <ion-icon name="calendar" color="danger" style="margin-right:7px;"></ion-icon>
+      {{"LAST_BACKUP" | translate }} : {{ backup_data_date }}
+    </small>
+  </div>
+
+  <ion-list>
+    <ion-list-header>
+      {{"USER_MANAGEMENT" | translate }}
+    </ion-list-header>
+  </ion-list>
+
+  <div style="padding:0.4em 10px;">
+    <ion-button expand="block" color="secondary" (click)="uploadPurchaseDocs()">
+      {{"DOCS_UPLOAD" | translate }}
+    </ion-button>
+  </div>
+
+  <div style="padding:0.4em 10px;">
+    <ion-button expand="block" color="primary" (click)="syncAnswers()">
+      {{"SYNC_ANSWERS" | translate }}
+    </ion-button>
+  </div>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>{{"LANG_SELECT" | translate }} </ion-label>
+      <ion-select [(ngModel)]="lang" name="lang" id="lang" (ionChange)="changeLanguage()">
+        <ion-select-option value="en">English</ion-select-option>
+        <ion-select-option value="fr">Français</ion-select-option>
+        <ion-select-option value="id">Bahasa</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <div style="margin:0.6em 10px;">
+    <ion-button color="danger" expand="block" disabled="true">{{"NEW_PASSWORD" | translate }} </ion-button>
+  </div>
+
+  <div style="text-align: center; width:100%; margin-top:40px;">{{"VERSION" | translate }} 1.40</div>
+</ion-content>

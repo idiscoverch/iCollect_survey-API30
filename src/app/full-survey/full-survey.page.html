@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="backToDetails()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon name="reader-outline"></ion-icon> {{"SURVEY" | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="started">
+    <ion-item>
+      <ion-label position="stacked">{{"LIST_SCOPE" | translate }} </ion-label>
+      <ion-select [(ngModel)]="id_scope" interface="action-sheet" name="id_scope" (ionChange)="checkScope()">
+        <ion-select-option *ngFor="let item of scopesList" [value]="item.id_regvalue">{{item.cvalue}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="selected_scop">
+      <ion-label position="stacked">{{"LIST_PARTNERS" | translate }} </ion-label>
+      <ion-select [(ngModel)]="id_partner" interface="action-sheet" name="id_partner">
+        <ion-select-option *ngFor="let item of partnersList" [value]="item.id_contact">{{item.contact_name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked"> {{"APPEARANCE" | translate }} </ion-label>
+      <ion-select [(ngModel)]="id_appearance" interface="action-sheet" name="id_appearance">
+        <ion-select-option *ngFor="let item of appearanceList" [value]="item.id_regvalue">{{item.cvalue}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked"> {{"FUNCTION" | translate }} </ion-label>
+      <ion-select [(ngModel)]="id_function" interface="action-sheet" name="id_function">
+        <ion-select-option *ngFor="let item of functionList" [value]="item.id_regvalue">{{item.cvalue}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">{{"ORG_NAME" | translate }}</ion-label>
+      <ion-input type="text" [(ngModel)]="organisation" name="organisation"></ion-input>
+    </ion-item>
+
+    <div style="margin:0.6em 10px;">
+      <ion-button color="danger" expand="block" (click)="startSurvey();">{{"START_SURVEY" | translate }}
+      </ion-button>
+    </div>
+  </ion-list>
+
+
+  <ion-list *ngIf="!started">
+    <ion-item color="danger" style="font-size: small;">
+      <ion-label><strong>{{"TOWNS" | translate }} : </strong></ion-label> {{ sel_village }}
+    </ion-item>
+
+    <ion-item color="danger" style="font-size: small;">
+      <ion-label><strong>{{"LIST_SCOPE" | translate }} : </strong></ion-label> {{ sel_scope }}
+    </ion-item>
+
+    <ion-item color="danger" style="font-size: small;">
+      <ion-label><strong>{{"LIST_PARTNERS" | translate }} : </strong></ion-label> {{ sel_partner }}
+    </ion-item>
+
+    <div style="width:100%; text-align: center; font-size: larger;" *ngIf="spinner">
+      <ion-spinner name="circles"></ion-spinner>
+    </div>
+
+    <ion-item *ngFor="let item of questionList; let i = index">
+      <ion-label *ngIf="item.text_answer != null">
+        <ion-row>
+          <ion-col size="2" no-padding>
+            <div class="question_numb_done">{{i + 1}}</div>
+          </ion-col>
+
+          <ion-col size="10" no-padding>
+            <h3> {{ item.question }}</h3>
+            <small style="color:lightslategray">
+              <ion-icon name="caret-forward-outline"></ion-icon> {{ item.text_answer }}
+            </small>
+          </ion-col>
+        </ion-row>
+      </ion-label>
+
+      <ion-label *ngIf="item.text_answer == null"
+        (click)="getAnswer(item.sv_answer_type_id,item.id_criteria,item.sequence,item.scope_id,item.survey_unique_id);">
+        <ion-row>
+          <ion-col size="2" no-padding>
+            <div class="question_numb">{{i + 1}}</div>
+          </ion-col>
+
+          <ion-col size="10" no-padding>
+            <h2>{{ item.question }}</h2>
+          </ion-col>
+        </ion-row>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<div *ngIf="!issue_btn" style="margin:0.6em 10px;">
+  <ion-button color="danger" expand="block" (click)="newIssue();">{{"NEW_ISSUE" | translate }} </ion-button>
+</div>
+
+<ion-fab vertical="top" horizontal="end" *ngIf="add_media" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="camera"></ion-icon>
+  </ion-fab-button>
+
+  <ion-fab-list side="bottom">
+    <ion-fab-button (click)="selectImage()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button (click)="captureVideo()">
+      <ion-icon name="videocam"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button (click)="captureAudio()">
+      <ion-icon name="mic"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>

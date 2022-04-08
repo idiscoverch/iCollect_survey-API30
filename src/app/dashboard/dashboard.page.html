@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="ionRefresh($event)" (ionPull)="ionPull($event)"
+    (ionStart)="ionStart($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <img src="../../assets/mdlz-logo.png" style="margin-top: 60px; margin-left: 18%;">
+  
+  <h5 style="text-align: center;">{{"WELCOME" | translate }} !</h5>
+
+  <div class="db_boxes_user"> 
+    <ion-row>
+      <ion-col size="4" no-padding>
+        <ion-icon name="person-outline" style="font-size:3em;"></ion-icon>
+      </ion-col>
+  
+      <ion-col size="8" no-padding>
+        <div style="width:100%; margin-bottom:3px;">{{ name }}</div>
+        <small>{{ company_name }}</small>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="db_boxes" (click)="mySurvey();">
+    <ion-row>
+      <ion-col size="4" no-padding>
+        <ion-icon name="reader-outline" style="font-size:3em;"></ion-icon>
+      </ion-col>
+  
+      <ion-col size="8" no-padding>
+        <div style="width:100%; margin-bottom:3px;">{{"NB_SURVEY" | translate }}</div>
+        <small>{{ count_survey }}</small>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="db_boxes" (click)="myIssue();">
+    <ion-row>
+      <ion-col size="4" no-padding>
+        <ion-icon name="ticket-outline" style="font-size:3em;"></ion-icon>
+      </ion-col>
+  
+      <ion-col size="8" no-padding>
+        <div style="width:100%; margin-bottom:3px;">{{"NB_ISSUE" | translate }}</div>
+        <small>{{ count_issues }}</small>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="logout" (click)="logOut();">{{"LOGOUT" | translate }}</div>
+</ion-content>

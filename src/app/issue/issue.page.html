@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="backToDetails()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title><ion-icon name="ticket-outline"></ion-icon> {{"ISSUE" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">{{"LIST_SCOPE" | translate }} </ion-label>
+      <ion-select [(ngModel)]="id_scope" interface="action-sheet" name="id_scope" class="ion-text-wrap" (ionChange)="checkScope()" disabled="{{ disabled_select }}">
+        <ion-select-option *ngFor="let item of scopesList" 
+          [value]="item.id_regvalue">{{item.cvalue}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="selected_scop">
+      <ion-label position="stacked">{{"LIST_PARTNERS" | translate }} </ion-label>
+      <ion-select [(ngModel)]="id_partner" interface="action-sheet" name="id_partner" class="ion-text-wrap" disabled="{{ disabled_select }}">
+        <ion-select-option *ngFor="let item of partnersList" 
+          [value]="item.id_contact">{{item.contact_name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="selected_scop">
+      <ion-label position="stacked"> {{"ISSUE_CATEGORY" | translate }} </ion-label>
+      <ion-select [(ngModel)]="id_issue_cat" interface="action-sheet" name="id_issue_cat" class="ion-text-wrap" (ionChange)="checkCategory()">
+        <ion-select-option *ngFor="let item of categoriesList" 
+          [value]="item.trigger_id">{{item.trigger_name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="selected_cat">
+      <ion-label position="stacked"> {{"SELECT_ACTIONS" | translate }} </ion-label>
+      <ion-select [(ngModel)]="trigger_regvalue" name="trigger_regvalue" class="ion-text-wrap" (ionChange)="getActionData()">
+        <ion-select-option *ngFor="let item of actionsList" 
+          [value]="item.trigger_regvalue">{{item.topic_desc}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-label position="stacked"> {{"APPEARANCE" | translate }} </ion-label>
+    <ion-select [(ngModel)]="id_appearance" interface="action-sheet" name="id_appearance" class="ion-text-wrap" disabled="{{ disabled_select }}">
+      <ion-select-option *ngFor="let item of appearanceList" 
+        [value]="item.id_regvalue">{{item.cvalue}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked"> {{"FUNCTION" | translate }} </ion-label>
+    <ion-select [(ngModel)]="id_function" interface="action-sheet" name="id_function" class="ion-text-wrap" disabled="{{ disabled_select }}">
+      <ion-select-option *ngFor="let item of functionList" 
+        [value]="item.id_regvalue">{{item.cvalue}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>  
+
+  <ion-item>
+    <ion-label position="stacked"> {{"ORG_NAME" | translate }} </ion-label>
+    <ion-input type="text" [(ngModel)]="organisation" name="organisation"></ion-input>
+  </ion-item>  
+
+  <ion-item>
+    <ion-label position="stacked"> {{"COMMENT" | translate }} </ion-label>
+    <ion-textarea elastic rows="5" [(ngModel)]="comment" name="comment"></ion-textarea>
+  </ion-item>
+
+  <div style="margin:0.6em 10px; text-align: center;" *ngIf="survQ">
+    <div class="mic_rec" (click)="captureAudio()"> <ion-icon name="mic"></ion-icon> </div>
+    <ion-button color="danger" expand="block" (click)="submit();">{{"SUBMIT" | translate }} </ion-button>
+  </div> 
+</ion-content>
+
+<ion-fab vertical="top" horizontal="end" *ngIf="add_media" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="camera"></ion-icon>
+  </ion-fab-button>
+
+  <ion-fab-list side="bottom">
+    <ion-fab-button (click)="selectImage()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button *ngIf="loadImg" (click)="loadImage()">
+      <ion-icon name="image"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button (click)="captureVideo()">
+      <ion-icon name="videocam"></ion-icon>
+    </ion-fab-button>
+  
+    <ion-fab-button (click)="captureAudio()">
+      <ion-icon name="mic"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>

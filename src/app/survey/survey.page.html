@@ -1,0 +1,153 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="backToDetails()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon name="reader-outline"></ion-icon> {{"SURVEY" | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="started">
+    <ion-item>
+      <ion-label position="stacked">{{"LIST_SCOPE" | translate }} </ion-label>
+      <ion-select [(ngModel)]="id_scope" interface="action-sheet" name="id_scope" (ionChange)="checkScope()">
+        <ion-select-option *ngFor="let item of scopesList" [value]="item.id_regvalue">{{item.cvalue}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="selected_scop">
+      <ion-label position="stacked">{{"LIST_PARTNERS" | translate }} </ion-label>
+      <ion-select [(ngModel)]="id_partner" interface="action-sheet" name="id_partner">
+        <ion-select-option *ngFor="let item of partnersList" [value]="item.id_contact">{{item.contact_name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked"> {{"APPEARANCE" | translate }} </ion-label>
+      <ion-select [(ngModel)]="id_appearance" interface="action-sheet" name="id_appearance">
+        <ion-select-option *ngFor="let item of appearanceList" [value]="item.id_regvalue">{{item.cvalue}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked"> {{"FUNCTION" | translate }} </ion-label>
+      <ion-select [(ngModel)]="id_function" interface="action-sheet" name="id_function">
+        <ion-select-option *ngFor="let item of functionList" [value]="item.id_regvalue">{{item.cvalue}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">{{"ORG_NAME" | translate }}</ion-label>
+      <ion-input type="text" [(ngModel)]="organisation" name="organisation"></ion-input>
+    </ion-item>
+
+    <div style="margin:0.6em 10px;">
+      <ion-button color="danger" expand="block" (click)="startSurvey();">{{"START_SURVEY" | translate }}
+      </ion-button>
+    </div>
+  </ion-list>
+
+  <ion-list *ngIf="!started">
+    <ion-item>
+      <ion-label><strong>{{"TOWNS" | translate }} : </strong></ion-label> {{ sel_village }}
+    </ion-item>
+
+    <ion-item>
+      <ion-label><strong>{{"LIST_SCOPE" | translate }} : </strong></ion-label> {{ sel_scope }}
+    </ion-item>
+
+    <ion-item>
+      <ion-label><strong>{{"LIST_PARTNERS" | translate }} : </strong></ion-label> {{ sel_partner }}
+    </ion-item>
+
+    <ion-list-header color="danger" class="ion-text-wrap">
+      <p><strong>Question :</strong> <br /> {{ question }}</p>
+    </ion-list-header>
+
+    <ion-radio-group [(ngModel)]="selectedAnswer" *ngIf="survQ_grade">
+      <ion-item *ngFor="let item of answerList" (ionFocus)="radioFocus()" (click)="radioSelect(item.sv_answers_def_id)"
+        (ionBlur)="radioBlur()">
+        <ion-label class="ion-text-wrap">{{item.answer}} </ion-label>
+        <ion-radio slot="start" name="selectedAnswer" value="{{item.sv_answers_def_id}}"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+    <ion-item *ngIf="survQ_date">
+      <ion-label position="stacked">{{"DATE" | translate }} <b color="danger">*</b></ion-label>
+      <ion-datetime displayFormat="MMMM YYYY" [(ngModel)]="date_answer" name="date_answer" min="1950-01" max="2022-12"
+        pickerFormat="MMMM YYYY"></ion-datetime>
+    </ion-item>
+
+    <ion-item *ngIf="survQ_text">
+      <ion-label position="stacked">{{"TEXT" | translate }} <b color="danger">*</b></ion-label>
+      <ion-textarea elastic rows="5" [(ngModel)]="text_answer" name="text_answer"></ion-textarea>
+    </ion-item>
+
+    <ion-item *ngIf="survQ_number">
+      <ion-label position="stacked">{{"NUMBER" | translate }} <b color="danger">*</b></ion-label>
+      <ion-input type="number" [(ngModel)]="number_answer" name="number_answer"></ion-input>
+    </ion-item>
+
+    <!--<ion-item *ngIf="survQ_yesno">
+      <ion-label position="stacked">{{"YES_NO" | translate }} <b color="danger">*</b></ion-label>
+      <ion-select [(ngModel)]="yes_no_answer" name="yes_no_answer" (ionChange)="getSelectedYesNo()">
+        <ion-select-option *ngFor="let item of answerList" value="{{item.sv_answers_def_id}}">{{item.answer}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>-->
+
+    <ion-item *ngIf="survQ_multiple">
+      <ion-label position="stacked">{{"MULTIPLE_CHOICE" | translate }} </ion-label>
+      <ion-select multiple="true" interface="action-sheet" [(ngModel)]="multiple_answer" name="multiple_answer">
+        <ion-select-option *ngFor="let item of answerList" value="{{item.sv_answers_def_id}}">{{item.answer}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">{{"COMMENT" | translate }}</ion-label>
+      <ion-textarea elastic rows="5" [(ngModel)]="sv_comment" name="sv_comment"></ion-textarea>
+    </ion-item>
+
+    <div style="margin:0.6em 10px;">
+      <ion-button color="danger" expand="block" (click)="next();" disabled="{{ disabled_btn }}">{{"NEXT_QUESTION" |
+        translate }}
+      </ion-button>
+    </div>
+
+    <div style="margin:0.6em 10px; text-align: center;">
+      {{ question_pagination }}
+    </div>
+  </ion-list>
+
+</ion-content>
+
+
+<ion-fab vertical="top" horizontal="end" *ngIf="add_media" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="camera"></ion-icon>
+  </ion-fab-button>
+
+  <ion-fab-list side="bottom">
+    <ion-fab-button (click)="selectImage()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button (click)="captureVideo()">
+      <ion-icon name="videocam"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button (click)="captureAudio()">
+      <ion-icon name="mic"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>

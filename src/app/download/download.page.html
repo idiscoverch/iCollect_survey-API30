@@ -1,0 +1,150 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" *ngIf="login">
+      <ion-button (click)="back()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{"DOWNLOAD_LIST" | translate }}</ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-spinner style="margin-left:43%;" *ngIf="loading" name="dots"></ion-spinner>
+
+  <ion-list>
+    <ion-item *ngIf="regvalues_total">
+      <ion-label>
+        <h3>Regvalues</h3>
+        <p>{{ regvalues_total_rows }}/<strong>{{ regvalues_total }}</strong></p>
+        <small style="color:#9fa0a2;">{{ regvalues_data_date }}</small>
+        <ion-progress-bar *ngIf="regvalues_spinner" color="danger" value={{regvalues_progress}}></ion-progress-bar>
+      </ion-label>
+      <ion-icon *ngIf="regvalues_row_less" color="danger" slot="end" name="alert-circle-outline"></ion-icon>
+      <ion-icon *ngIf="regvalues_row_ok" color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item *ngIf="registers_total">
+      <ion-label>
+        <h3>Registers</h3>
+        <p>{{ registers_total_rows }}/<strong>{{ registers_total }}</strong></p>
+        <small style="color:#9fa0a2;">{{ registers_data_date }}</small>
+        <ion-progress-bar *ngIf="registers_spinner" color="danger" value={{registers_progress}}></ion-progress-bar>
+      </ion-label>
+      <ion-icon *ngIf="registers_row_less" color="danger" slot="end" name="alert-circle-outline"></ion-icon>
+      <ion-icon *ngIf="registers_row_ok" color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
+
+    <!--
+    <ion-item *ngIf="scope_total">
+      <ion-label>
+        <h3>Scope Partner</h3>
+        <p>{{ scope_total_rows }}/<strong>{{ scope_total }}</strong></p>
+        <small style="color:#9fa0a2;">{{ scope_data_date }}</small>
+        <ion-progress-bar *ngIf="scope_spinner" color="danger" value={{scope_progress}}></ion-progress-bar>
+      </ion-label>
+      <ion-icon *ngIf="scope_row_less" color="danger" slot="end" name="alert-circle-outline"></ion-icon>
+      <ion-icon *ngIf="scope_row_ok" color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
+    -->
+
+    <ion-item *ngIf="answers_total">
+      <ion-label>
+        <h3>Answers </h3>
+        <p>{{ answers_total_rows }}/<strong>{{ answers_total }}</strong></p>
+        <small style="color:#9fa0a2;">{{ answers_data_date }}</small>
+        <ion-progress-bar *ngIf="answers_spinner" color="danger" value={{answers_progress}}></ion-progress-bar>
+      </ion-label>
+      <ion-icon *ngIf="answers_row_less" color="danger" slot="end" name="alert-circle-outline"></ion-icon>
+      <ion-icon *ngIf="answers_row_ok" color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item *ngIf="towns_total">
+      <ion-label>
+        <h3>Towns</h3>
+        <p>{{ towns_total_rows }}/<strong>{{ towns_total }}</strong></p>
+        <small style="color:#9fa0a2;">{{ towns_data_date }}</small>
+        <ion-progress-bar *ngIf="towns_spinner" color="danger" value={{towns_progress}}></ion-progress-bar>
+      </ion-label>
+      <ion-icon *ngIf="towns_row_less" color="danger" slot="end" name="alert-circle-outline"></ion-icon>
+      <ion-icon *ngIf="towns_row_ok" color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
+
+    <!--
+    <ion-item *ngIf="deployment_total">
+      <ion-label>
+        <h3>Agent Deployment</h3>
+        <p>{{ deployment_total_rows }}/<strong>{{ deployment_total }}</strong></p>
+        <small style="color:#9fa0a2;">{{ deployment_data_date }}</small>
+        <ion-progress-bar *ngIf="deployment_spinner" color="danger" value={{deployment_progress}}></ion-progress-bar>
+      </ion-label>
+      <ion-icon *ngIf="deployment_row_less" color="danger" slot="end" name="alert-circle-outline"></ion-icon>
+      <ion-icon *ngIf="deployment_row_ok" color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item *ngIf="task_total">
+      <ion-label>
+        <h3>Project Task</h3>
+        <p>{{ task_total_rows }}/<strong>{{ task_total }}</strong></p>
+        <small style="color:#9fa0a2;">{{ task_data_date }}</small>
+        <ion-progress-bar *ngIf="task_spinner" color="danger" value={{task_progress}}></ion-progress-bar>
+      </ion-label>
+      <ion-icon *ngIf="task_row_less" color="danger" slot="end" name="alert-circle-outline"></ion-icon>
+      <ion-icon *ngIf="task_row_ok" color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
+  -->
+
+    <ion-item *ngIf="projects_total">
+      <ion-label>
+        <h3>Project</h3>
+        <p>{{ projects_total_rows }}/<strong>{{ projects_total }}</strong></p>
+        <small style="color:#9fa0a2;">{{ projects_data_date }}</small>
+        <ion-progress-bar *ngIf="projects_spinner" color="danger" value={{projects_progress}}></ion-progress-bar>
+      </ion-label>
+      <ion-icon *ngIf="projects_row_less" color="danger" slot="end" name="alert-circle-outline"></ion-icon>
+      <ion-icon *ngIf="projects_row_ok" color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item *ngIf="certification_total">
+      <ion-label>
+        <h3>Certification Action</h3>
+        <p>{{ certification_total_rows }}/<strong>{{ certification_total }}</strong></p>
+        <small style="color:#9fa0a2;">{{ certification_data_date }}</small>
+        <ion-progress-bar *ngIf="certification_spinner" color="danger" value={{certification_progress}}></ion-progress-bar>
+      </ion-label>
+      <ion-icon *ngIf="certification_row_less" color="danger" slot="end" name="alert-circle-outline"></ion-icon>
+      <ion-icon *ngIf="certification_row_ok" color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item *ngIf="triggers_total">
+      <ion-label>
+        <h3>Triggers Actions</h3>
+        <p>{{ triggers_total_rows }}/<strong>{{ triggers_total }}</strong></p>
+        <small style="color:#9fa0a2;">{{ projects_data_date }}</small>
+        <ion-progress-bar *ngIf="triggers_spinner" color="danger" value={{triggers_progress}}></ion-progress-bar>
+      </ion-label>
+      <ion-icon *ngIf="triggers_row_less" color="danger" slot="end" name="alert-circle-outline"></ion-icon>
+      <ion-icon *ngIf="triggers_row_ok" color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item *ngIf="task_scope_total">
+      <ion-label>
+        <h3>Tasc Scopes</h3>
+        <p>{{ task_scope_total_rows }}/<strong>{{ task_scope_total }}</strong></p>
+        <small style="color:#9fa0a2;">{{ projects_data_date }}</small>
+        <ion-progress-bar *ngIf="task_scope_spinner" color="danger" value={{task_scope_progress}}></ion-progress-bar>
+      </ion-label>
+      <ion-icon *ngIf="task_scope_row_less" color="danger" slot="end" name="alert-circle-outline"></ion-icon>
+      <ion-icon *ngIf="task_scope_row_ok" color="success" slot="end" name="checkmark-circle-outline"></ion-icon>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
+
+<ion-footer *ngIf="login">
+  <ion-toolbar color="danger">
+    <ion-button fill="clear" expand="full" (click)="download()" style="color:#fff;">
+      <ion-icon slot="start" name="cloud-download-outline"></ion-icon> {{"DOWNLOAD_BTN" | translate }}
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="backToDetails()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{"SELECT_TOWN" | translate }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="width: 260px; margin:0 auto;">
+    <img src="assets/image/towns.jpg" style="width: 260px; height: auto;">
+  </div>
+
+  <div style="margin-bottom: 20px; text-align: center;"> {{"SELECT_TOWN_TXT" | translate }} </div>
+
+  <div style="margin:0.6em 10px;">
+    <ion-button color="danger" expand="block" (click)="byRegion();"> {{"BY_REGION" | translate }} </ion-button>
+  </div>
+  
+  <div style="margin:0.6em 10px;">
+    <ion-button color="danger" expand="block" (click)="town();"> {{"PRE_SELECTED_TOWNS" | translate }} </ion-button>
+  </div>
+
+  <div style="width: 124px; margin:40px auto;">
+    <img src="assets/image/choice.png" style="width: 124px; height: auto;">
+  </div>
+
+  <div style="position:absolute; bottom:10px; text-align:center; font-size:small; color:darkgray; padding:10px;">
+    <p> {{"UPDATE_QUESTIONS" | translate }} <br/><strong>{{ project_name }}</strong> </p>
+    <ion-button color="medium" (click)="startDownload();">
+      <ion-icon style="margin-right:10px;" size="small" name="cloud-download-outline"></ion-icon> {{"DOWNLOAD_BTN" | translate }}
+    </ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="backToDetails()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{"TOWN_LIST" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="ionRefresh($event)" (ionPull)="ionPull($event)"
+    (ionStart)="ionStart($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <h3 *ngIf="townList.length == 0" style="text-align: center;">Aucune Sous-Préfecture</h3>
+
+  <ion-list>
+    <ion-list-header color="danger">
+      {{"SOUS_PREFECTURE" | translate }} 
+    </ion-list-header>
+
+    <ion-item *ngFor="let item of townList" (click)="townSelection(item.region3)">
+      <ion-label>
+        <h3>{{item.region3}}</h3>
+      </ion-label>
+      <ion-button slot="end" fill="clear">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
